@@ -1,8 +1,17 @@
-# story_app
+# Application "Story App" - Simple Social Media
 
-Aplikasi - Sosial Media Sederhana
 
-Aplikasi ini memungkinkan untuk setiap orang untuk membuat dan memiliki akun masing". Dalam aplikasi tersebut setiap akun dapat memposting suatu teks yang dapat dilihat oleh seluruh pengguna aplikasi. Selain login dan register, aplikasi ini memiliki 2 halaman utama yaitu halaman utama dan halaman profil.
+This application allows each person to create and have their own account. In this application, each account can send a story containing text and images which can be seen by all application users. Apart from logging in and registering, this application has 2 main pages, namely home page and profile page.
+Stories that have been posted can be edited and deleted on the profile page.
+
+## Some Screenshots
+  <img src="https://github.com/zakyzaidan/story_app/assets/66929086/7383a656-2148-48bd-aebc-53b25f33c7b8" height="400em" >
+  <img src="https://github.com/zakyzaidan/story_app/assets/66929086/919150e2-4e6b-4f59-886f-1f017982bac2" height="400em" >
+  <img src="https://github.com/zakyzaidan/story_app/assets/66929086/08d3624b-665b-4b4a-90ba-795de21dcb7b" height="400em" >
+  <img src="https://github.com/zakyzaidan/story_app/assets/66929086/79857c3e-d27a-464c-9c16-7fd19de0d033" height="400em" >
+  
+
+
 
 ## Getting Started
 
