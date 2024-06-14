@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_app/assets/database_services.dart';
+import 'package:story_app/assets/date_format.dart';
 import 'package:story_app/home/model/story_model.dart';
 import 'package:story_app/login_register/UI/login_screen.dart';
 import 'package:story_app/profile/bloc/profile_bloc.dart';
@@ -191,7 +192,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       username: snapshot.data!.docs[index]
                                           ["username"],
                                       email: snapshot.data!.docs[index]
-                                          ["email"]);
+                                          ["email"],
+                                      uploadTime: snapshot.data!.docs[index]
+                                          ["uploadTime"]);
+                                  DateTime time = story.uploadTime.toDate();
 
                                   return Container(
                                     decoration: BoxDecoration(
@@ -233,12 +237,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       story.email,
                                                       style: const TextStyle(
                                                           fontWeight:
-                                                              FontWeight.w300),
+                                                              FontWeight.w300,
+                                                          fontSize: 13),
                                                     ),
                                                   ],
                                                 ),
                                               ],
                                             ),
+                                            Text(
+                                              displayDateDifferenceFromTodayWithMS(
+                                                  time),
+                                              style:
+                                                  const TextStyle(fontSize: 13),
+                                            )
                                           ],
                                         ),
                                         const SizedBox(

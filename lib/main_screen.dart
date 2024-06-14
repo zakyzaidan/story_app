@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
           onTap: (index) => onTap(index),
           currentIndex: _currIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(
                 activeIcon: Icon(Icons.home),
                 icon: Icon(Icons.home_outlined),

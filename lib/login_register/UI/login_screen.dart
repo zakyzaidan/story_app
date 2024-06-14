@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Login",
                             style: TextStyle(fontSize: 25),
                           ),

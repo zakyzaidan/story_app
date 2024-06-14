@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_app/assets/database_services.dart';
@@ -65,10 +66,13 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
                   FloatingActionButton.extended(
                       onPressed: () async {
                         UserModel user = await databaseServices.getUser();
+                        Timestamp uploadTime =
+                            Timestamp.fromDate(DateTime.now());
                         final StoryModel storyModel = StoryModel(
                             story: _storyTextController.text,
                             username: user.username,
-                            email: user.email);
+                            email: user.email,
+                            uploadTime: uploadTime);
                         homeBloc.add(
                             UploadButtonClickedEvent(storyModel: storyModel));
                       },

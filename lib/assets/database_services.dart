@@ -21,7 +21,10 @@ class DatabaseServices {
   }
 
   Stream<QuerySnapshot> getAllStory() {
-    final snapshot = firestore.collection("story").snapshots();
+    final snapshot = firestore
+        .collection("story")
+        .orderBy("uploadTime", descending: true)
+        .snapshots();
     return snapshot;
   }
 
@@ -29,16 +32,18 @@ class DatabaseServices {
     final snapshot = firestore
         .collection("story")
         .where("email", isEqualTo: email)
-        .snapshots();
-    return snapshot;
+        .orderBy("uploadTime", descending: true);
+    final s = snapshot.snapshots();
+    return s;
   }
 
   deleteMyStory(String email, int index) async {
-    final myStoryRef = await firestore
+    final myStoryRef = firestore
         .collection("story")
         .where("email", isEqualTo: email)
-        .get();
-    final idDeletedstory = myStoryRef.docs[index].id;
+        .orderBy("uploadTime", descending: true);
+    final myStory = await myStoryRef.get();
+    final idDeletedstory = myStory.docs[index].id;
     try {
       await firestore.collection("story").doc(idDeletedstory).delete();
     } catch (e) {
@@ -47,11 +52,12 @@ class DatabaseServices {
   }
 
   editMyStory(String email, int index, String story) async {
-    final myStoryRef = await firestore
+    final myStoryRef = firestore
         .collection("story")
         .where("email", isEqualTo: email)
-        .get();
-    final idEditStory = myStoryRef.docs[index].id;
+        .orderBy("uploadTime", descending: true);
+    final myStory = await myStoryRef.get();
+    final idEditStory = myStory.docs[index].id;
     try {
       await firestore
           .collection("story")
@@ -62,10 +68,26 @@ class DatabaseServices {
     }
   }
 
-  editProfile(String username, String bio) async {
+  editProfile(String username, String bio, String email) async {
     await firestore
         .collection("users")
         .doc(auth.currentUser!.uid)
         .update({"username": username, "bio": bio});
+
+    //ganti semua nama pada story
+    final myStory = await firestore
+        .collection("story")
+        .where("email", isEqualTo: email)
+        .get();
+    final length = myStory.docs.length;
+
+    for (var i = 0; i < length; i++) {
+      final id = myStory.docs[i].id;
+
+      await firestore
+          .collection("story")
+          .doc(id)
+          .update({"username": username});
+    }
   }
 }

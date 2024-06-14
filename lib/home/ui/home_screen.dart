@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_app/assets/database_services.dart';
+import 'package:story_app/assets/date_format.dart';
 import 'package:story_app/home/bloc/home_bloc.dart';
 import 'package:story_app/home/model/story_model.dart';
 import 'package:story_app/home/ui/add_story_screen.dart';
@@ -65,7 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           StoryModel story = StoryModel(
                               story: snapshot.data!.docs[index]["story"],
                               username: snapshot.data!.docs[index]["username"],
-                              email: snapshot.data!.docs[index]["email"]);
+                              email: snapshot.data!.docs[index]["email"],
+                              uploadTime: snapshot.data!.docs[index]
+                                  ["uploadTime"]);
+                          DateTime time = story.uploadTime.toDate();
 
                           return Container(
                             decoration: BoxDecoration(
@@ -75,34 +79,46 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const CircleAvatar(
-                                      radius: 20,
-                                      child: Icon(
-                                        Icons.person,
-                                        size: 20,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    Row(
                                       children: [
-                                        Text(
-                                          story.username,
-                                          style: const TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
+                                        const CircleAvatar(
+                                          radius: 20,
+                                          child: Icon(
+                                            Icons.person,
+                                            size: 20,
+                                          ),
                                         ),
-                                        Text(
-                                          story.email,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.w300),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              story.username,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              story.email,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w300,
+                                                  fontSize: 13),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
+                                    Text(
+                                      displayDateDifferenceFromTodayWithMS(
+                                          time),
+                                      style: const TextStyle(fontSize: 13),
+                                    )
                                   ],
                                 ),
                                 const SizedBox(

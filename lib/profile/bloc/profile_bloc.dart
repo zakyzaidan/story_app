@@ -27,11 +27,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   FutureOr<void> profileEditButtonClickedEvent(
-      ProfileEditButtonClickedEvent event, Emitter<ProfileState> emit) {
+      ProfileEditButtonClickedEvent event, Emitter<ProfileState> emit) async {
     DatabaseServices databaseServices = DatabaseServices();
+    UserModel user = await databaseServices.getUser();
     emit(ProfileLoadingState());
     try {
-      databaseServices.editProfile(event.username, event.bio);
+      databaseServices.editProfile(event.username, event.bio, user.email);
       emit(ProfileUpdateProfileButtonClickedState());
     } catch (e) {
       print("something got wrong");
