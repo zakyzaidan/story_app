@@ -1,6 +1,8 @@
 # story_app
 
-A new Flutter project.
+Aplikasi - Sosial Media Sederhana
+
+Aplikasi ini memungkinkan untuk setiap orang untuk membuat dan memiliki akun masing". Dalam aplikasi tersebut setiap akun dapat memposting suatu teks yang dapat dilihat oleh seluruh pengguna aplikasi. Selain login dan register, aplikasi ini memiliki 2 halaman utama yaitu halaman utama dan halaman profil.
 
 ## Getting Started
 
