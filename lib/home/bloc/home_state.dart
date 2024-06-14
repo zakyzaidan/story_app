@@ -12,3 +12,9 @@ final class UploadButtonClickedState extends HomeActionState {}
 final class HomeLoadingState extends HomeState {}
 
 final class HomeLoadedSuccessState extends HomeState {}
+
+final class TakeImageFromGaleryClickedState extends HomeState {
+  final Uint8List? img;
+
+  TakeImageFromGaleryClickedState({required this.img});
+}

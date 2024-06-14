@@ -15,8 +15,10 @@ final class ProfileInitialEvent extends ProfileEvent {}
 final class DeleteMystoryEvent extends ProfileEvent {
   final String email;
   final int index;
+  final String imgName;
 
-  DeleteMystoryEvent({required this.email, required this.index});
+  DeleteMystoryEvent(
+      {required this.email, required this.index, required this.imgName});
 }
 
 final class EditMyStoryButtonClickedEvent extends ProfileEvent {
@@ -26,3 +28,7 @@ final class EditMyStoryButtonClickedEvent extends ProfileEvent {
   EditMyStoryButtonClickedEvent(
       {required this.index, required this.storyModel});
 }
+
+final class TakeImageFromCameraClickedEvent extends ProfileEvent {}
+
+final class TakeImageFromGaleryClickedEvent extends ProfileEvent {}

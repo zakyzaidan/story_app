@@ -10,3 +10,7 @@ final class UploadButtonClickedEvent extends HomeEvent {
 
   UploadButtonClickedEvent({required this.storyModel});
 }
+
+final class TakeImageFromGaleryClickedEvent extends HomeEvent {}
+
+final class TakeImageFromCameraClickedEvent extends HomeEvent {}

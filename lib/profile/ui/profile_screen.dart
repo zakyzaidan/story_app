@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return const Scaffold(
               body: Center(child: CircularProgressIndicator()),
             );
-          case ProfileLoadedSuccessState:
+          case const (ProfileLoadedSuccessState):
             final successState = state as ProfileLoadedSuccessState;
             final user = successState.user;
             final Stream<QuerySnapshot> dataMyStory =
@@ -91,7 +92,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text(user.bio),
+                          Text(
+                            user.bio,
+                            maxLines: 3,
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
@@ -187,6 +191,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 itemCount: snapshot.data!.docs.length,
                                 itemBuilder: (context, index) {
                                   StoryModel story = StoryModel(
+                                      imgName: snapshot.data!.docs[index]
+                                          ["imgName"],
+                                      imgUrl: snapshot.data!.docs[index]
+                                          ["imgUrl"],
                                       story: snapshot.data!.docs[index]
                                           ["story"],
                                       username: snapshot.data!.docs[index]
@@ -253,7 +261,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ],
                                         ),
                                         const SizedBox(
-                                          height: 20,
+                                          height: 10,
+                                        ),
+                                        story.imgUrl != ""
+                                            ? Align(
+                                                alignment:
+                                                    const Alignment(0, 0),
+                                                child: ConstrainedBox(
+                                                    constraints:
+                                                        const BoxConstraints(
+                                                            minHeight: 20,
+                                                            maxHeight: 400),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: story.imgUrl,
+                                                      fit: BoxFit.contain,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  progress) =>
+                                                              CircularProgressIndicator(
+                                                        value:
+                                                            progress.progress,
+                                                      ),
+                                                    )),
+                                              )
+                                            : const SizedBox(),
+                                        const SizedBox(
+                                          height: 10,
                                         ),
                                         Text(story.story),
                                         Row(
@@ -287,6 +320,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                             TextButton(
                                                                 onPressed: () {
                                                                   profileBloc.add(DeleteMystoryEvent(
+                                                                      imgName: story
+                                                                          .imgName,
                                                                       email: story
                                                                           .email,
                                                                       index:

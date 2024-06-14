@@ -28,13 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
       bloc: loginRegisterBloc,
       builder: (context, state) {
         switch (state.runtimeType) {
-          case LoginRegisterLoadingState:
+          case const (LoginRegisterLoadingState):
             return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
-          case LoginRegisterSuccessState:
+          case const (LoginRegisterSuccessState):
             return Scaffold(
               body: GestureDetector(
                 onTap: () {
@@ -130,7 +130,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             );
           default:
-            return const Placeholder();
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
         }
       },
     );

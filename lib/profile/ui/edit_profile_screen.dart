@@ -38,13 +38,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       },
       builder: (context, state) {
         switch (state.runtimeType) {
-          case ProfileLoadingState:
+          case const (ProfileLoadingState):
             return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
-          case ProfileLoadedSuccessState:
+          case const (ProfileLoadedSuccessState):
             final successState = state as ProfileLoadedSuccessState;
             final UserModel user = successState.user;
             _bioTextController.text = user.bio;
@@ -81,8 +81,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       const Text("Bio"),
                       SizedBox(
-                        height:
-                            100, //     <-- TextField expands to this height.
+                        height: 100,
                         child: TextField(
                           controller: _bioTextController,
                           minLines: 1,

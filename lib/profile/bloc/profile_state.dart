@@ -18,3 +18,9 @@ final class ProfileActionState extends ProfileState {}
 final class ProfileUpdateProfileButtonClickedState extends ProfileActionState {}
 
 final class EditMyStoryButtonClickedState extends ProfileActionState {}
+
+final class TakeImageClickedState extends ProfileState {
+  final Uint8List? img;
+
+  TakeImageClickedState({required this.img});
+}

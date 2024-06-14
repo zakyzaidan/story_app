@@ -51,7 +51,7 @@ class DatabaseServices {
     }
   }
 
-  editMyStory(String email, int index, String story) async {
+  editMyStory(String email, int index, String story, String imgUrl) async {
     final myStoryRef = firestore
         .collection("story")
         .where("email", isEqualTo: email)
@@ -62,7 +62,7 @@ class DatabaseServices {
       await firestore
           .collection("story")
           .doc(idEditStory)
-          .update({"story": story});
+          .update({"story": story, "imgUrl": imgUrl});
     } catch (e) {
       print(e);
     }

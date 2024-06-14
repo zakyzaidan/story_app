@@ -28,13 +28,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       bloc: loginRegisterBloc,
       builder: (context, state) {
         switch (state.runtimeType) {
-          case LoginRegisterLoadingState:
+          case const (LoginRegisterLoadingState):
             return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
-          case LoginRegisterSuccessState:
+          case const (LoginRegisterSuccessState):
             return Scaffold(
               body: GestureDetector(
                 onTap: () {
